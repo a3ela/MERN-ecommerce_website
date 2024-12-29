@@ -1,0 +1,21 @@
+{
+  "name": "trendzy",
+  "version": "1.0.0",
+  "description": "a simple ecommerce website with MERN stack",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "node --watch backend/server.js",
+    "client": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "abel sintayehu",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^9.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.2"
+  }
+}
