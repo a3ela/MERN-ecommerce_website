@@ -8,11 +8,11 @@ const Header = () => {
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <Navbar.Brand as={Link} to="/">
-            ProShop
+            Nitro
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto">
+            <Nav className="ms-auto">
               <Nav.Link as={Link} to="/cart">
                 <FaShoppingCart /> Cart
               </Nav.Link>
