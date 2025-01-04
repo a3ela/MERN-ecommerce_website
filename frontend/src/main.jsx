@@ -14,12 +14,14 @@ import {
 import App from "./App.jsx";
 import Home from "./pages/Home.jsx";
 import Product from "./pages/Product.jsx";
+import Cart from "./pages/Cart.jsx";
 
 const routers = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/" element={<Home />} />
-      <Route path="/product/:id" element=<Product /> />
+      <Route path="/product/:id" element={<Product />} />
+      <Route path="/cart" element={<Cart />} />
     </Route>
   )
 );
