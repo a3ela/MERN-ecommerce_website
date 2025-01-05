@@ -1,3 +1,6 @@
+const jwt = require("jsonwebtoken");
+const User = require("../models/userModel");
+
 const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
@@ -23,4 +26,35 @@ const errorHandler = (err, req, res, next) => {
   });
 };
 
-module.exports = { asyncHandler, notFound, errorHandler };
+const protect = asyncHandler(async (req, res, next) => {
+  let token;
+
+  token = req.cookies.jwt;
+
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, process.env.SECRET);
+      req.user = await User.findById(decoded.userId).select("-password");
+    } catch (error) {
+      console.log(error);
+      res.status(401);
+      throw new Error("Token not recognized!");
+    }
+
+    next();
+  } else {
+    res.status(401);
+    throw new Error("None authorized token");
+  }
+});
+
+const admin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error("not authorized");
+  }
+};
+
+module.exports = { asyncHandler, notFound, errorHandler, protect, admin };
