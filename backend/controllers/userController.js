@@ -1,22 +1,13 @@
 const middleware = require("../utils/middleware");
 const User = require("../models/userModel");
-const jwt = require("jsonwebtoken");
+const generateToken = require("../utils/generateToken");
+
 const loginUser = middleware.asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
-    const token = jwt.sign({ userId: user._id }, process.env.SECRET, {
-      expiresIn: "1d",
-    });
-
-    // set JWT on HTTP-only cookie
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      sameSite: "Strict",
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
-    });
+    generateToken(res, user._id);
 
     res.json({
       _id: user._id,
@@ -33,13 +24,13 @@ const loginUser = middleware.asyncHandler(async (req, res) => {
 const registerUser = middleware.asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  const userExist = User.findOne({ email });
+  const userExist = await User.findOne({ email });
 
   if (userExist) {
     res.status(400);
     throw new Error("user already exists");
   }
-
+  console.log(userExist);
   const user = await User.create({
     name,
     email,
@@ -47,6 +38,7 @@ const registerUser = middleware.asyncHandler(async (req, res) => {
   });
 
   if (user) {
+    generateToken(res, user._id);
     res.status(201).json({
       _id: user._id,
       name: user.name,
