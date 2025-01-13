@@ -1,8 +1,8 @@
-const middleware = require("../utils/middleware");
+const asyncHandler = require("../middleware/asyncHandler");
 const User = require("../models/userModel");
 const generateToken = require("../utils/generateToken");
 
-const loginUser = middleware.asyncHandler(async (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
@@ -21,7 +21,7 @@ const loginUser = middleware.asyncHandler(async (req, res) => {
   }
 });
 
-const registerUser = middleware.asyncHandler(async (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   const userExist = await User.findOne({ email });
@@ -51,7 +51,7 @@ const registerUser = middleware.asyncHandler(async (req, res) => {
   }
 });
 
-const logoutUser = middleware.asyncHandler(async (req, res) => {
+const logoutUser = asyncHandler(async (req, res) => {
   res.cookie("jwt", "", {
     httpOnly: true,
     expires: new Date(0),
@@ -60,7 +60,7 @@ const logoutUser = middleware.asyncHandler(async (req, res) => {
   res.status(200).json({ message: "logged out Successfully" });
 });
 
-const getUserProfile = middleware.asyncHandler(async (req, res) => {
+const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -76,7 +76,7 @@ const getUserProfile = middleware.asyncHandler(async (req, res) => {
   }
 });
 
-const updateUserProfile = middleware.asyncHandler(async (req, res) => {
+const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -101,19 +101,19 @@ const updateUserProfile = middleware.asyncHandler(async (req, res) => {
   }
 });
 
-const getUsers = middleware.asyncHandler(async (req, res) => {
+const getUsers = asyncHandler(async (req, res) => {
   res.send("get user");
 });
 
-const deleteUser = middleware.asyncHandler(async (req, res) => {
+const deleteUser = asyncHandler(async (req, res) => {
   res.send("delete user");
 });
 
-const getUserById = middleware.asyncHandler(async (req, res) => {
+const getUserById = asyncHandler(async (req, res) => {
   res.send("get user by id");
 });
 
-const updateUser = middleware.asyncHandler(async (req, res) => {
+const updateUser = asyncHandler(async (req, res) => {
   res.send("update user");
 });
 

@@ -8,7 +8,7 @@ const {
   updateOrderToDelivered,
   getOrders,
 } = require("../controllers/orderController");
-const { protect, admin } = require("../utils/middleware");
+const { protect, admin } = require("../middleware/authMiddleware");
 
 router.route("/").post(protect, addOrderItems).get(protect, admin, getOrders);
 router.route("/me").get(protect, getMyOrders);

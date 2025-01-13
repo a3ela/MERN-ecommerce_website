@@ -1,12 +1,12 @@
-const middleware = require("../utils/middleware");
+const asyncHandler = require("../middleware/asyncHandler");
 const Product = require("../models/productModel");
 
-const getProducts = middleware.asyncHandler(async (req, res) => {
+const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({});
   res.json(products);
 });
 
-const getProductsById = middleware.asyncHandler(async (req, res) => {
+const getProductsById = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
