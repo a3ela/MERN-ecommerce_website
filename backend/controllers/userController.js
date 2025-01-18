@@ -15,6 +15,8 @@ const loginUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
     });
+
+    console.log("req.cookie: ", req.cookies.token);
   } else {
     res.status(401);
     throw new Error("Invalid email or password");
