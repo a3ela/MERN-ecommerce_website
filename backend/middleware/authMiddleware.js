@@ -4,10 +4,7 @@ const User = require("../models/userModel");
 
 // User must be authenticated
 const protect = asyncHandler(async (req, res, next) => {
-  let token;
-
-  // Read JWT from the 'jwt' cookie
-  token = req.cookies.jwt;
+  const token = req.cookies.token;
 
   if (token) {
     try {
@@ -19,6 +16,7 @@ const protect = asyncHandler(async (req, res, next) => {
     } catch (error) {
       console.error(error);
       res.status(401);
+      res.clearCookie("token");
       throw new Error("Not authorized, token failed");
     }
   } else {
