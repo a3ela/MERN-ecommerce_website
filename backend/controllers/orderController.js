@@ -1,5 +1,5 @@
 const asyncHandler = require("../middleware/asyncHandler");
-const Order = require("../models/productModel");
+const Order = require("../models/orderModel");
 
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
@@ -33,6 +33,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
     const createdOrder = await order.save();
     res.status(201).json(createdOrder);
+    console.log("done item created!");
   }
 });
 
