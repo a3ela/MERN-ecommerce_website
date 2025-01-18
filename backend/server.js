@@ -3,7 +3,6 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT;
 const connectDB = require("./config/db");
-const cors = require("cors");
 const logger = require("./utils/logger");
 const cookieParser = require("cookie-parser");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
