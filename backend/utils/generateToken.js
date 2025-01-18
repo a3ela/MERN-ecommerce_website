@@ -2,15 +2,14 @@ const jwt = require("jsonwebtoken");
 
 const generateToken = (res, userId) => {
   const token = jwt.sign({ userId }, process.env.SECRET, {
-    expiresIn: "1d",
+    expiresIn: "1h",
   });
 
   // set JWT on HTTP-only cookie
-  res.cookie("jwt", token, {
-    httpOnly: false,
-    secure: process.env.NODE_ENV !== "development",
-    sameSite: "strict",
-    maxAge: 24 * 60 * 60 * 1000, // 1 day
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // Ensure secure cookies in production
+    sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax", // Adjust based on environment
   });
 };
 
