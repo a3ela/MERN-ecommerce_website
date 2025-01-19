@@ -23,6 +23,7 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import Payment from "./pages/Payment.jsx";
 import Order from "./pages/Order.jsx";
 import OrderPlace from "./pages/OrderPlace.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const routers = createBrowserRouter(
   createRoutesFromElements(
@@ -38,6 +39,7 @@ const routers = createBrowserRouter(
         <Route path="/payment" element={<Payment />} />
         <Route path="/orders" element={<Order />} />
         <Route path="/order/:id" element={<OrderPlace />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Route>
   )
