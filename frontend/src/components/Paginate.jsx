@@ -1,7 +1,7 @@
 import { Pagination, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Paginate = ({ page, pages, isAdmin = false }) => {
+const Paginate = ({ page, pages, isAdmin = false, keyword = "" }) => {
   return (
     <>
       <Pagination>
@@ -10,7 +10,11 @@ const Paginate = ({ page, pages, isAdmin = false }) => {
             <Nav.Link
               as={Link}
               to={
-                !isAdmin ? `/page/${x + 1}` : `/admin/productlist/page/${x + 1}`
+                !isAdmin
+                  ? keyword
+                    ? `/search/${keyword}/page/${x + 1}`
+                    : `/page/${x + 1}`
+                  : `/admin/productlist/page/${x + 1}`
               }
               active={x + 1 === page}
               className="page-link"
@@ -20,7 +24,7 @@ const Paginate = ({ page, pages, isAdmin = false }) => {
           </Nav.Item>
         ))}
       </Pagination>
-      <style jsx>{`
+      <style jsx="true">{`
         .page-link {
           color: #007bff;
           text-decoration: none;
