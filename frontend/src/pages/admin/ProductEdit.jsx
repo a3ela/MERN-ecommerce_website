@@ -10,6 +10,7 @@ import {
   useUpdateProductMutation,
   useUploadProductImageMutation,
 } from "../../features/productSLice";
+import { FaArrowLeft } from "react-icons/fa";
 
 const ProductEditScreen = () => {
   const { id: productId } = useParams();
@@ -84,7 +85,7 @@ const ProductEditScreen = () => {
   return (
     <>
       <Link to="/admin/productlist" className="btn btn-light my-3">
-        Go Back
+        <FaArrowLeft />
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>
