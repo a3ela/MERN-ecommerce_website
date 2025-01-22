@@ -13,6 +13,7 @@ import Message from "../components/Message";
 import { addToCart } from "../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import Meta from "../components/Meta";
 
 const Product = () => {
   const { id: productId } = useParams();
@@ -58,6 +59,7 @@ const Product = () => {
   };
   return (
     <>
+      <Meta title={product?.name} />
       <Link className="btn btn-light my-3" to="/">
         <FaArrowLeft />
       </Link>
