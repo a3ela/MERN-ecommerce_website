@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
@@ -9,9 +10,13 @@ import {
   useDeleteProductMutation,
 } from "../../features/productSLice";
 import { toast } from "react-toastify";
+import Paginate from "../../components/Paginate";
 
 const ProductList = () => {
-  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+  const { pageNumber } = useParams();
+  const { data, isLoading, error, refetch } = useGetProductsQuery({
+    pageNumber,
+  });
   const [deleteProduct, { isLoading: deleting }] = useDeleteProductMutation();
 
   const [createProduct, { isLoading: creating }] = useCreateProductMutation();
@@ -69,7 +74,7 @@ const ProductList = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+              {data.products.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
@@ -94,6 +99,11 @@ const ProductList = () => {
               ))}
             </tbody>
           </Table>
+          <Row className="justify-content-md-center">
+            <Col className="d-flex justify-content-center">
+              <Paginate pages={data.pages} page={data.page} isAdmin={true} />
+            </Col>
+          </Row>
         </>
       )}
     </>
