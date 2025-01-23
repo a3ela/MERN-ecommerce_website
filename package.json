@@ -10,7 +10,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder.js",
     "data:destroy": "node backend/seeder.js -d",
-    "build:ui": "rm -rf backend/dist && cd ../frontend/ && npm run build && cp -r dist ../backend"
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "abel sintayehu",
   "license": "MIT",
