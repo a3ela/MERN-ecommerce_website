@@ -51,7 +51,7 @@ const OrderList = () => {
                   )}
                 </td>
                 <td>
-                  <Link to={`/admin/orders/${order._id}`}>
+                  <Link to={`/order/${order._id}`}>
                     <Button variant="light" className="btn-sm">
                       Details
                     </Button>
