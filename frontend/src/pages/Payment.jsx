@@ -45,9 +45,10 @@ const Payment = () => {
             ></Form.Check>
             <Form.Check
               type="radio"
-              label="Stripe"
+              label="Stripe(coming soon)"
               id="Stripe"
               name="paymentMethod"
+              disabled={true}
               value="Stripe"
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
