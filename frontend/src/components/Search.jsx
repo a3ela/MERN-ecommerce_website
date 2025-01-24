@@ -29,7 +29,7 @@ const Search = () => {
       ></Form.Control>
       <Button
         type="submit"
-        variant="outline-success"
+        variant="outline-light"
         className="p-2 mx-2 rounded-circle"
         style={{
           width: "40px",
