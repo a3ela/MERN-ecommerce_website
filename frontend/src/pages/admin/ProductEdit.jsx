@@ -31,6 +31,7 @@ const ProductEditScreen = () => {
   } = useGetProductDetailQuery(productId);
 
   const [updateProduct, { isLoading: updating }] = useUpdateProductMutation();
+
   const [uploadProductImage, { isLoading: uploading }] =
     useUploadProductImageMutation();
 
@@ -85,7 +86,7 @@ const ProductEditScreen = () => {
   return (
     <>
       <Link to="/admin/productlist" className="btn btn-light my-3">
-        <FaArrowLeft />
+        <FaArrowLeft /> Go Back
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>

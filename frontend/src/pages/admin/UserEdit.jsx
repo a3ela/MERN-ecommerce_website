@@ -55,7 +55,7 @@ const UserEdit = () => {
   return (
     <>
       <Link to="/admin/userlist" className="btn btn-light my-3">
-        <FaArrowLeft />
+        <FaArrowLeft /> Go Back
       </Link>
       <FormContainer>
         <h1>Edit User</h1>

@@ -6,7 +6,6 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import {
   useGetProductsQuery,
-  useCreateProductMutation,
   useDeleteProductMutation,
 } from "../../features/productSLice";
 import { toast } from "react-toastify";
@@ -19,7 +18,6 @@ const ProductList = () => {
   });
   const [deleteProduct, { isLoading: deleting }] = useDeleteProductMutation();
 
-  const [createProduct, { isLoading: creating }] = useCreateProductMutation();
   const deleteHandler = async (id) => {
     if (window.confirm("Are you sure?")) {
       try {
@@ -32,16 +30,6 @@ const ProductList = () => {
     }
   };
 
-  const createProductHandler = async () => {
-    if (window.confirm("Click 'OK' if you want to create product.")) {
-      try {
-        await createProduct();
-        refetch();
-      } catch (error) {
-        toast.error(error?.data?.message || error.error);
-      }
-    }
-  };
   return (
     <>
       <Row className="align-item-center">
@@ -49,12 +37,12 @@ const ProductList = () => {
           <h1>Products</h1>
         </Col>
         <Col className="text-end">
-          <Button onClick={createProductHandler}>
+          <Link to="/admin/create/product" className="btn btn-primary my-3">
             <FaEdit /> Create Product
-          </Button>
+          </Link>
         </Col>
       </Row>
-      {creating && <Loader />}
+
       {deleting && <Loader />}
       {isLoading ? (
         <Loader />
