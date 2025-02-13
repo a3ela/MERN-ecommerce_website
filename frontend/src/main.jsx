@@ -31,6 +31,7 @@ import ProductList from "./pages/admin/ProductList.jsx";
 import ProductEdit from "./pages/admin/ProductEdit.jsx";
 import UserList from "./pages/admin/UserList.jsx";
 import UserEdit from "./pages/admin/UserEdit.jsx";
+import CreateProduct from "./pages/admin/CreateProduct.jsx";
 
 const routers = createBrowserRouter(
   createRoutesFromElements(
@@ -62,6 +63,7 @@ const routers = createBrowserRouter(
         <Route path="/admin/product/:id/edit" element={<ProductEdit />} />
         <Route path="/admin/userlist" element={<UserList />} />
         <Route path="/admin/user/:id/edit" element={<UserEdit />} />
+        <Route path="/admin/create/product" element={<CreateProduct />} />
       </Route>
     </Route>
   )
