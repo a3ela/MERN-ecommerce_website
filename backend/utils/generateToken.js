@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
+console.log('secret key: ',process.env.SECRET);
 const generateToken = (res, userId) => {
   const token = jwt.sign({ userId }, process.env.SECRET, {
     expiresIn: "1d",
@@ -8,9 +10,11 @@ const generateToken = (res, userId) => {
   // set JWT on HTTP-only cookie
   res.cookie("token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // Ensure secure cookies in production
-    sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax", // Adjust based on environment
+    secure: false, // Ensure secure cookies in production
+    sameSite: "lax", // Adjust based on environment
   });
+
+  console.log("Generated token:", token);
 };
 
 module.exports = generateToken;

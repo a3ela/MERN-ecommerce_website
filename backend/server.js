@@ -12,12 +12,20 @@ const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
+const cors = require("cors");
 
 connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000", // frontend origin
+    credentials: true, // allow cookies
+  })
+);
 
 // routes
 app.use("/api/products", productRoutes);
